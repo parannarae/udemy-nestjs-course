@@ -2,8 +2,11 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Q
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { UserDto } from './dtos/user.dto';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
     // no inject decorator as DI will figure out the type `UsersService`
     constructor(private usersService: UsersService) {}
@@ -13,6 +16,9 @@ export class UsersController {
         this.usersService.create(body.email, body.password);
     }
 
+    // @UseInterceptors(ClassSerializerInterceptor)    // Apply serializer interceptor
+    // @UseInterceptors(SerializeInterceptor)
+    // @UseInterceptors(new SerializeInterceptor(UserDto))
     @Get('/:id')
     async findUser(@Param('id') id: string) {
         // Note that the part of url is string -> Param is needed to be parsed

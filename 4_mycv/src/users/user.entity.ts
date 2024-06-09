@@ -1,4 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, AfterInsert, AfterUpdate, AfterRemove } from 'typeorm';    // import decorators to be used in TypeORM
+// import { Exclude } from 'class-transformer'
 
 // Note by convention we don't put `Entity` as the postfix
 @Entity()
@@ -10,6 +11,7 @@ export class User {
     email: string;
 
     @Column()
+    // @Exclude()  // decorator to remove this property in request/response
     password: string;
 
     @AfterInsert()  // Hook API
