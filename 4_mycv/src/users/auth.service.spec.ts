@@ -67,8 +67,15 @@ describe('AuthService', () => {
 
   it('throws an error if user signs up with email that is in use', async () => {
     // redefined (overwrite) find to test this scenario
-    fakeUsersService.find = () =>
-      Promise.resolve([{ id: 1, email: 'a', password: '1' } as User]);
+    // fakeUsersService.find = () =>
+    //   Promise.resolve([{ id: 1, email: 'a', password: '1' } as User]);
+
+    // await expect(service.signup('asdf@asdf.com', 'asdf')).rejects.toThrow(
+    //   BadRequestException,
+    // );
+
+    // refactor: Use intelligent mock - simply call sign up twice
+    await service.signup('asdf@asdf.com', 'asdf');
 
     await expect(service.signup('asdf@asdf.com', 'asdf')).rejects.toThrow(
       BadRequestException,
@@ -82,12 +89,18 @@ describe('AuthService', () => {
   });
 
   it('throws if an invalid password is provided', async () => {
-    // redefined (overwrite) find to test this scenario
-    fakeUsersService.find = () =>
-      Promise.resolve([{ email: 'asdf@asdf.com', password: 'asdf' } as User]);
-    // note that passing in email does not really matter as UsersService.find will return mock value anyway
+    // // redefined (overwrite) find to test this scenario
+    // fakeUsersService.find = () =>
+    //   Promise.resolve([{ email: 'asdf@asdf.com', password: 'asdf' } as User]);
+    // // note that passing in email does not really matter as UsersService.find will return mock value anyway
+    // await expect(
+    //   service.signin('asdklfj@djkas.com', 'password'),
+    // ).rejects.toThrow(BadRequestException);
+
+    // refactor: Use intelligent mock
+    await service.signup('lkasjdf@djkas.com', 'password');
     await expect(
-      service.signin('asdklfj@djkas.com', 'password'),
+      service.signin('lkasjdf@djkas.com', 'adlkasjdf'),
     ).rejects.toThrow(BadRequestException);
   });
 
