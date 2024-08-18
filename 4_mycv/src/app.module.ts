@@ -30,14 +30,18 @@ const cookieSession = require('cookie-session');
       useValue: new ValidationPipe({
         whitelist: true,
       }),
-    }
+    },
   ],
 })
 export class AppModule {
   // Called automatically whenever incoming request is made
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(cookieSession({
-      keys: ['asdfasfd']  // string to be used to encrypt cookie value
-    })).forRoutes('*')  // apply middleware for all (*) routes
+    consumer
+      .apply(
+        cookieSession({
+          keys: ['asdfasfd'], // string to be used to encrypt cookie value
+        }),
+      )
+      .forRoutes('*'); // apply middleware for all (*) routes
   }
 }

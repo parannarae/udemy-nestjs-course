@@ -6,7 +6,7 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('AuthService', () => {
   let service: AuthService; // To make the service (created in beforeEach) be visible to all `it`
-  let fakeUsersService: Partial<UsersService>;  // allow to be accessible by each `it` to change its form
+  let fakeUsersService: Partial<UsersService>; // allow to be accessible by each `it` to change its form
 
   beforeEach(async () => {
     // Create a fake copy of the users service

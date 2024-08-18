@@ -20,15 +20,17 @@ describe('Authentication System', () => {
     //  Check if 201 is returned with an user body
     const email = 'asdlkjq4321@akl.com';
 
-    return request(app.getHttpServer())
-      .post('/auth/signup')
-      .send({ email: email, password: 'alskdfjl' })
-      .expect(201)  // check the returning status code
-      // check the response body
-      .then((res) => {
-        const { id, email } = res.body;
-        expect(id).toBeDefined();
-        expect(email).toEqual(email);
-      });
+    return (
+      request(app.getHttpServer())
+        .post('/auth/signup')
+        .send({ email: email, password: 'alskdfjl' })
+        .expect(201) // check the returning status code
+        // check the response body
+        .then((res) => {
+          const { id, email } = res.body;
+          expect(id).toBeDefined();
+          expect(email).toEqual(email);
+        })
+    );
   });
 });

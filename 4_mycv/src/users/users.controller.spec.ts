@@ -13,7 +13,11 @@ describe('UsersController', () => {
   beforeEach(async () => {
     fakeUsersService = {
       findOne: (id: number) => {
-        return Promise.resolve({ id, email: 'asdf@asdf.com', password: 'asdf' } as User);
+        return Promise.resolve({
+          id,
+          email: 'asdf@asdf.com',
+          password: 'asdf',
+        } as User);
       },
       find: (email: string) => {
         return Promise.resolve([{ id: 1, email, password: 'asdf' } as User]);
@@ -38,8 +42,8 @@ describe('UsersController', () => {
         {
           provide: AuthService,
           useValue: fakeAuthService,
-        }
-      ]
+        },
+      ],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
@@ -69,7 +73,10 @@ describe('UsersController', () => {
   it('signin updates session object and returns user', async () => {
     const session = { userId: -10 };
     // note email and password can be anything since authService will be mocked anyway
-    const user = await controller.signin({ email: 'asdf@asdf.com', password: 'asdf' }, session);
+    const user = await controller.signin(
+      { email: 'asdf@asdf.com', password: 'asdf' },
+      session,
+    );
 
     expect(user.id).toEqual(1);
     expect(session.userId).toEqual(1);
