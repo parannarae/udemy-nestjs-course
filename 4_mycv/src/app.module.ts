@@ -7,17 +7,33 @@ import { ReportsModule } from './reports/reports.module';
 import { User } from './users/user.entity';
 import { Report } from './reports/report.entity';
 import { APP_PIPE } from '@nestjs/core';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 const cookieSession = require('cookie-session');
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      // Set up configuration for SQLite
-      type: 'sqlite',
-      database: 'db.sqlite', // name of database == file name to store all data
-      entities: [User, Report], // list out all the entities to be used (e.g. UserEntity, ReportEntity)
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true, // set to global such that this module is created only once for the system lifespan
+      envFilePath: `.env.${process.env.NODE_ENV}`,  // set the .env file according to the current environment
     }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService], // Allow DI to inject ConfigService while setting up TypeORM module
+      useFactory: (config: ConfigService) => {
+        return {
+          type: 'sqlite',
+          database: config.get<string>('DB_NAME'), // Get DB_NAME from .env file
+          synchronize: true,
+          entities: [User, Report],
+        };
+      },
+    }),
+    // TypeOrmModule.forRoot({
+    //   // Set up configuration for SQLite
+    //   type: 'sqlite',
+    //   database: 'db.sqlite', // name of database == file name to store all data
+    //   entities: [User, Report], // list out all the entities to be used (e.g. UserEntity, ReportEntity)
+    //   synchronize: true,
+    // }),
     UsersModule,
     ReportsModule,
   ],

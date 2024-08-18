@@ -33,4 +33,26 @@ describe('Authentication System', () => {
         })
     );
   });
+
+  it('signup as a new user then get the currently logged in user', async () => {
+    // signup -> whoami API calls
+    const email = 'asdf@asdf.com';
+
+    // super agent (a library used to test following request) do not handle cookie automatically
+    const res = await request(app.getHttpServer())
+      .post('/auth/signup')
+      .send({ email, password: 'asdf' })
+      .expect(201);
+
+    // Getting cookie header from response
+    const cookie = res.get('Set-Cookie');
+
+    // Check response body if it has the expected user
+    const { body } = await request(app.getHttpServer())
+      .get('/auth/whoami')
+      .set('Cookie', cookie)
+      .expect(200);
+
+    expect(body.email).toEqual(email);
+  });
 });
