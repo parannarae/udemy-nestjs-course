@@ -1,0 +1,36 @@
+{
+    "__meta__": {
+        "about": "HTTPie session file",
+        "help": "https://httpie.io/docs#sessions",
+        "httpie": "3.2.3"
+    },
+    "auth": {
+        "password": null,
+        "type": null,
+        "username": null
+    },
+    "cookies": [
+        {
+            "domain": "localhost.local",
+            "expires": null,
+            "name": "session",
+            "path": "/",
+            "secure": false,
+            "value": "eyJ1c2VySWQiOm51bGx9"
+        },
+        {
+            "domain": "localhost.local",
+            "expires": null,
+            "name": "session.sig",
+            "path": "/",
+            "secure": false,
+            "value": "X5GHVnLM52TuuGLk_0MrpHOHJtg"
+        }
+    ],
+    "headers": [
+        {
+            "name": "Accept",
+            "value": "application/json, */*;q=0.5"
+        }
+    ]
+}

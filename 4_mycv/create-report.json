@@ -1,0 +1,9 @@
+{
+    "make": "toyota",
+    "model": "corolla",
+    "year": 1980,
+    "mileage": 100000,
+    "lng": 0,
+    "lat": 0,
+    "price": 500000
+}
