@@ -1,3 +1,4 @@
+import { Report } from 'src/reports/report.entity';
 import {
   Entity,
   Column,
@@ -5,6 +6,7 @@ import {
   AfterInsert,
   AfterUpdate,
   AfterRemove,
+  OneToMany,
 } from 'typeorm'; // import decorators to be used in TypeORM
 // import { Exclude } from 'class-transformer'
 
@@ -20,6 +22,9 @@ export class User {
   @Column()
   // @Exclude()  // decorator to remove this property in request/response
   password: string;
+
+  @OneToMany(() => Report, (report) => report.user) // no change in DB
+  reports: Report[];
 
   @AfterInsert() // Hook API
   logInsert() {

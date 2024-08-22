@@ -16,7 +16,7 @@
             "name": "session",
             "path": "/",
             "secure": false,
-            "value": "eyJ1c2VySWQiOm51bGx9"
+            "value": "eyJ1c2VySWQiOjF9"
         },
         {
             "domain": "localhost.local",
@@ -24,7 +24,7 @@
             "name": "session.sig",
             "path": "/",
             "secure": false,
-            "value": "X5GHVnLM52TuuGLk_0MrpHOHJtg"
+            "value": "2DhXTb7Tv-MA_UOkJZs-JjwOyvM"
         }
     ],
     "headers": [
