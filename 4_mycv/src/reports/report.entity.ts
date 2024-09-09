@@ -6,6 +6,10 @@ export class Report {
   @PrimaryGeneratedColumn()
   id: number;
 
+  // Make default value being false
+  @Column({ default: false })
+  approved: boolean;
+
   @Column()
   price: number;
 

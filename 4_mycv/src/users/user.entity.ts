@@ -23,6 +23,9 @@ export class User {
   // @Exclude()  // decorator to remove this property in request/response
   password: string;
 
+  @Column({ default: true }) // will fix the default later
+  admin: boolean;
+
   @OneToMany(() => Report, (report) => report.user) // no change in DB
   reports: Report[];
 
